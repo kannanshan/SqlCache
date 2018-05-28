@@ -9,6 +9,7 @@
 package com.indix.cache.model.impl;
 
 import java.sql.Timestamp;
+import java.util.Map;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -43,19 +44,21 @@ public class CacheDAOImpl implements CacheDAO {
 	}
 
 	@Override
-	public void setKey(String key, String value) {
+	public void setKey(Map<String, String> value) {
 		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 		Session session = null;
 		Transaction txn = null;
 		try {
 			session = sessionFactory.openSession();
 			txn = session.beginTransaction();
-			Cache cache = new Cache();
-			cache.setKey(key);
-			cache.setValue(value);
-			cache.setCreatedAt(new Timestamp(System.currentTimeMillis()));
-			cache.setUpdatedAt(new Timestamp(System.currentTimeMillis()));
-			session.saveOrUpdate(cache);
+			for (String key : value.keySet()) {
+				Cache cache = new Cache();
+				cache.setKey(key);
+				cache.setValue(value.get(key));
+				cache.setCreatedAt(new Timestamp(System.currentTimeMillis()));
+				cache.setUpdatedAt(new Timestamp(System.currentTimeMillis()));
+				session.saveOrUpdate(cache);
+			}
 			txn.commit();
 		} finally {
 			session.close();

@@ -14,15 +14,47 @@ import com.indix.cache.model.impl.ImplBuilder;
 
 public class CacheBO {
 
+	/**
+	 * 
+	 * @param key
+	 * @return
+	 */
 	public String getValue(String key) {
 		String value = ImplBuilder.getCacheImpleObject().getKey(key);
 		return value;
 	}
 
+	/**
+	 * 
+	 * @param valueObject
+	 */
 	public void setValue(Map<String, String> valueObject) {
-		for (String key : valueObject.keySet()) {
-			ImplBuilder.getCacheImpleObject().setKey(key, valueObject.get(key));
-		}
+		ImplBuilder.getCacheImpleObject().setKey(valueObject);
+	}
+
+	/**
+	 * 
+	 * @param valueObject
+	 */
+	public void putValue(Map<String, String> valueObject) {
+		setValue(valueObject);
+		addCommitLogs(valueObject);
+	}
+
+	/**
+	 * 
+	 * @param valueObject
+	 */
+	public void sinkData(Map<String, String> valueObject) {
+		setValue(valueObject);
+	}
+
+	/**
+	 * 
+	 * @param valueObject
+	 */
+	public void addCommitLogs(Map<String, String> valueObject) {
+		ImplBuilder.getCommitLogsObject().addCommitLogs(valueObject);
 	}
 
 }

@@ -8,9 +8,11 @@
 
 package com.indix.cache.model.dao;
 
+import java.util.Map;
+
 public interface CacheDAO {
 	
 	public String getKey(String key);
-	public void setKey(String key,String value);
+	public void setKey(Map<String,String> value);
 
 }

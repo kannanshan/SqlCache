@@ -6,5 +6,10 @@ public class ImplBuilder {
 	{
 		return new CacheDAOImpl();
 	}
+	
+	public static CommitLogsDAOImpl getCommitLogsObject()
+	{
+		return new CommitLogsDAOImpl();
+	}
 
 }
