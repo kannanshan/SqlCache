@@ -2,8 +2,13 @@
 *.class
 
 # Log file
+*.classpath
+*bin
+*target
 *.log
-
+*.settings
+*.project
+*.class
 # BlueJ files
 *.ctxt
 
