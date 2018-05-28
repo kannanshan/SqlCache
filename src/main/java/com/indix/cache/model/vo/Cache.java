@@ -5,6 +5,7 @@ import java.sql.Timestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
@@ -14,6 +15,7 @@ import javax.persistence.Table;
 public class Cache implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+	@Id
 	@Column(name = "CACHE_KEY")
 	private String key;
 

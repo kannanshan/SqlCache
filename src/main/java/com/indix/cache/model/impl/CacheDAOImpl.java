@@ -8,7 +8,7 @@
 
 package com.indix.cache.model.impl;
 
-import org.hibernate.query.Query;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -29,8 +29,8 @@ public class CacheDAOImpl implements CacheDAO{
 			session = sessionFactory.openSession();
 			txn = session.beginTransaction();
 			String hql = "SELECT CACHE_VALUE FROM CACHE WHERE CACHE_KEY=:CACHE_KEY";
-			//Query q = session.createSQLQuery(hql).addEntity(Cache.class);
-			Query q = session.createQuery(hql);
+			Query q = session.createSQLQuery(hql).addEntity(Cache.class);
+			//Query q = session.createQuery(hql);
 			q.setParameter("CACHE_KEY", key);
 			Object obj = q.list();
 			txn.commit();
