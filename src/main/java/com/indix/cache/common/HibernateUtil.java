@@ -14,12 +14,8 @@ public class HibernateUtil {
 	private static StandardServiceRegistry standardServiceRegistry;
 	static {
 		try {
-			String rootDirectory = "/tmp";
-			if (rootDirectory != null) {
-				configuration = new Configuration().configure(new File(rootDirectory + "/conf/hibernate.cfg.xml"));
-			} else {
-				configuration = new Configuration().configure("hibernate.cfg.xml");
-			}
+			String rootDirectory = null;
+			configuration = new Configuration().configure("hibernate.cfg.xml");
 			StandardServiceRegistryBuilder sb = new StandardServiceRegistryBuilder();
 			sb.applySettings(configuration.getProperties());
 			standardServiceRegistry = sb.build();
