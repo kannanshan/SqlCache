@@ -11,6 +11,6 @@ package com.indix.cache.model.dao;
 public interface CacheDAO {
 	
 	public String getKey(String key);
-	public String setKey(String key,String value);
+	public void setKey(String key,String value);
 
 }

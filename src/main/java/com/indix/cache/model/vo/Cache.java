@@ -27,4 +27,62 @@ public class Cache implements Serializable {
 
 	@Column(name = "UPDATED_AT")
 	private Timestamp updatedAt;
+
+	/**
+	 * @return the key
+	 */
+	public String getKey() {
+		return key;
+	}
+
+	/**
+	 * @param key the key to set
+	 */
+	public void setKey(String key) {
+		this.key = key;
+	}
+
+	/**
+	 * @return the value
+	 */
+	public String getValue() {
+		return value;
+	}
+
+	/**
+	 * @param value the value to set
+	 */
+	public void setValue(String value) {
+		this.value = value;
+	}
+
+	/**
+	 * @return the createdAt
+	 */
+	public Timestamp getCreatedAt() {
+		return createdAt;
+	}
+
+	/**
+	 * @param createdAt the createdAt to set
+	 */
+	public void setCreatedAt(Timestamp createdAt) {
+		this.createdAt = createdAt;
+	}
+
+	/**
+	 * @return the updatedAt
+	 */
+	public Timestamp getUpdatedAt() {
+		return updatedAt;
+	}
+
+	/**
+	 * @param updatedAt the updatedAt to set
+	 */
+	public void setUpdatedAt(Timestamp updatedAt) {
+		this.updatedAt = updatedAt;
+	}
+	
+	
 }

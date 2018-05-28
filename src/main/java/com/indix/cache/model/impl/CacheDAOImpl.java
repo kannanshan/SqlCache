@@ -8,6 +8,8 @@
 
 package com.indix.cache.model.impl;
 
+import java.sql.Timestamp;
+
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -17,34 +19,47 @@ import com.indix.cache.common.HibernateUtil;
 import com.indix.cache.model.dao.CacheDAO;
 import com.indix.cache.model.vo.Cache;
 
-public class CacheDAOImpl implements CacheDAO{
+public class CacheDAOImpl implements CacheDAO {
 
 	@Override
 	public String getKey(String key) {
-		String value;
+		String value = null;
 		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 		Session session = null;
 		Transaction txn = null;
 		try {
 			session = sessionFactory.openSession();
 			txn = session.beginTransaction();
-			String hql = "SELECT CACHE_VALUE FROM CACHE WHERE CACHE_KEY=:CACHE_KEY";
-			Query q = session.createSQLQuery(hql).addEntity(Cache.class);
-			//Query q = session.createQuery(hql);
-			q.setParameter("CACHE_KEY", key);
-			Object obj = q.list();
+			Cache cache = (Cache) session.get(Cache.class, key);
+			if (cache != null) {
+				value = cache.getValue();
+			}
 			txn.commit();
 
 		} finally {
 			session.close();
 		}
-		return "s";
+		return value;
 	}
 
 	@Override
-	public String setKey(String key, String value) {
-		// TODO Auto-generated method stub
-		return null;
+	public void setKey(String key, String value) {
+		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+		Session session = null;
+		Transaction txn = null;
+		try {
+			session = sessionFactory.openSession();
+			txn = session.beginTransaction();
+			Cache cache = new Cache();
+			cache.setKey(key);
+			cache.setValue(value);
+			cache.setCreatedAt(new Timestamp(System.currentTimeMillis()));
+			cache.setUpdatedAt(new Timestamp(System.currentTimeMillis()));
+			session.saveOrUpdate(cache);
+			txn.commit();
+		} finally {
+			session.close();
+		}
 	}
 
 }

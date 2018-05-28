@@ -21,20 +21,21 @@ public class CacheRequestResource {
 	@Path("get/{param}")
 	@Produces({ MediaType.APPLICATION_JSON })
 	@Consumes({ MediaType.APPLICATION_JSON })
-	public Response getMsg(@PathParam("param") String key) {
+	public Response getKey(@PathParam("param") String key) {
 		String value = BOBuilder.getCacheBO().getValue(key);
 		Map response = new HashMap();
 		response.put("value", value);
 		response.put("Status", "Success");
-		return Response.ok().entity(value).build();
+		return Response.status(200).entity(response).build();
 
 	}
 
 	@POST
-	@Path("set/")
+	@Path("set")
 	@Produces({ MediaType.APPLICATION_JSON })
 	@Consumes({ MediaType.APPLICATION_JSON })
-	public Response setMsg(Map<String, String> value) {
+	public Response setKey(Map<String, String> value) {
+		BOBuilder.getCacheBO().setValue(value);
 		return Response.status(200).build();
 	}
 
