@@ -18,6 +18,6 @@ public interface ClusterConfigDAO {
 	
 	public abstract List<ClusterConfiguration> getClusterConfiguration();
 	
-	public abstract void updateCommitLogId(ClusterConfiguration clusterConfiguration);
+	public abstract void updateClusterConfiguration(ClusterConfiguration clusterConfiguration);
 
 }

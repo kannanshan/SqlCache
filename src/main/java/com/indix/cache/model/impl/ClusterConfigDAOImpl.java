@@ -54,7 +54,10 @@ public class ClusterConfigDAOImpl implements ClusterConfigDAO {
 		try {
 			session = sessionFactory.openSession();
 			txn = session.beginTransaction();
-			clusterList = (List<ClusterConfiguration>) session.createCriteria(ClusterConfiguration.class).list();
+			String hql = "SELECT CLUSTER_CONF_ID,IP,PORT,COMMIT_LOG_ID,STATUS,CREATED_AT,UPDATED_AT FROM CLUSTER_CONFIGURATION WHERE STATUS != \"INACTIVE\"";
+			Query q = session.createSQLQuery(hql).addEntity(CommitLogs.class);
+			clusterList = (List<ClusterConfiguration>) q.list();
+			txn.commit();
 		} finally {
 			session.close();
 		}
@@ -62,7 +65,7 @@ public class ClusterConfigDAOImpl implements ClusterConfigDAO {
 	}
 
 	@Override
-	public void updateCommitLogId(ClusterConfiguration clusterConfiguration ) {
+	public void updateClusterConfiguration(ClusterConfiguration clusterConfiguration) {
 		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 		Session session = null;
 		Transaction txn = null;

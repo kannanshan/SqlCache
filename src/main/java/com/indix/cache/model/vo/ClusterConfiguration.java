@@ -29,6 +29,9 @@ public class ClusterConfiguration implements Serializable {
 	@Column(name = "COMMIT_LOG_ID")
 	private Integer commitLogId;
 	
+	@Column(name = "STATUS")
+	private String status;
+	
 	@Column(name = "CREATED_AT")
 	private Timestamp createdAt;
 
@@ -118,6 +121,22 @@ public class ClusterConfiguration implements Serializable {
 	public void setUpdatedAt(Timestamp updatedAt) {
 		this.updatedAt = updatedAt;
 	}
+
+	/**
+	 * @return the status
+	 */
+	public String getStatus() {
+		return status;
+	}
+
+	/**
+	 * @param status the status to set
+	 */
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	
+	
 	
 	
 }

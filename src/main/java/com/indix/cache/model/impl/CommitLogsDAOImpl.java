@@ -49,7 +49,7 @@ public class CommitLogsDAOImpl implements CommitLogsDAO {
 		try {
 			session = sessionFactory.openSession();
 			txn = session.beginTransaction();
-			String hql = "SELECT CLUSTER_CONF_ID,IP,PORT,COMMIT_LOG_ID,CREATED_AT,UPDATED_AT FROM CLUSTER_CONFIGURATION WHERE COMMIT_LOG_ID > :COMMIT_LOG_ID ORDER BY COMMIT_LOG_ID ASC LIMIT 10";
+			String hql = "SELECT COMMIT_LOG_ID,CACHE_KEY,CACHE_VALUE,OPERATION,CREATED_AT,UPDATED_AT FROM COMMIT_LOGS WHERE COMMIT_LOG_ID > :COMMIT_LOG_ID ORDER BY COMMIT_LOG_ID ASC LIMIT 30";
 			Query q = session.createSQLQuery(hql).addEntity(CommitLogs.class);
 			q.setParameter("COMMIT_LOG_ID", commitLogId);
 			commitLogs = (List<CommitLogs>) q.list();

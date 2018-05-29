@@ -8,9 +8,11 @@
 
 package com.indix.cache.bo;
 
+import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.json.simple.JSONObject;
@@ -71,10 +73,24 @@ public class CommitLogsBO {
 					valueMap.put(commitLog.getKey(), commitLog.getValue());
 					commitLogId = commitLog.getCommitLogId();
 				}
-				RestService.sendPostRequest("http://" + clusterConf.getIp() + ":" + clusterConf.getPort(), valueMap);
+				RestService.sendPostRequest(
+						"http://" + clusterConf.getIp() + ":" + clusterConf.getPort() + "/SqlCache/sink/", valueMap);
 				clusterConf.setCommitLogId(commitLogId);
-				ImplBuilder.getClusterConfigDAOImpl().updateCommitLogId(clusterConf);
+				clusterConf.setUpdatedAt(new Timestamp(System.currentTimeMillis()));
+				ImplBuilder.getClusterConfigDAOImpl().updateClusterConfiguration(clusterConf);
 			} catch (Exception e) {
+				String status = clusterConf.getStatus();
+				Timestamp updatedAt = clusterConf.getUpdatedAt();
+				if (status.equalsIgnoreCase("ACTIVE")) {
+					clusterConf.setStatus("FAILED");
+				} else {
+					Timestamp beforeTime = new Timestamp(System.currentTimeMillis() - TimeUnit.MINUTES.toMillis(30));
+					if (updatedAt.before(beforeTime)) {
+						clusterConf.setStatus("INACTIVE");
+					}
+				}
+				ImplBuilder.getClusterConfigDAOImpl().updateClusterConfiguration(clusterConf);
+				CommitLogsBO.setFlag(true);
 				System.out.println("Error in sinking data");
 			}
 		}

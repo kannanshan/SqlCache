@@ -33,7 +33,9 @@ public class BackGroundWorker implements Runnable {
 		while (isRunning) {
 			try {
 				this.work.run();
+				Thread.sleep(this.timeOut);
 			} catch (Exception e) {
+				e.printStackTrace();
 			}
 		}
 
