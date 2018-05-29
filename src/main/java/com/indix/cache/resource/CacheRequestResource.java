@@ -25,7 +25,6 @@ public class CacheRequestResource {
 		String value = BOBuilder.getCacheBO().getValue(key);
 		Map response = new HashMap();
 		response.put("value", value);
-		response.put("Status", "Success");
 		return Response.status(200).entity(response).build();
 
 	}
