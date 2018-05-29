@@ -1,14 +1,14 @@
 SCache - SQLCache
 
 Assumptions:
-Stores only string parameters. No additional data structures like list,array,set ,map are supported
-With respect to CAP theorem. Consistency is compromised so the SCache will be 100% available with eventually consistent data.
-Nodes in the cluster are not dicovered by itself. SCache doest not have a service discovery like zookeeper. we need to manually form the clusters with ip and port either via text file or via http calls.
+1 . Stores only string parameters. No additional data structures like list,array,set ,map are supported
+2 . With respect to CAP theorem. Consistency is compromised so the SCache will be 100% available with eventually consistent data.
+3 . Nodes in the cluster are not dicovered by itself. SCache doest not have a service discovery like zookeeper. we need to manually form the clusters with ip and port either via text file or via http calls.
 
 Possible Improvements:
-SCache uses Mysql has the underlying data store. As concurrency,faster retrieval and partitions are handled in MySql by default it was easy for development but we can define our own storage using files to make it faster.
-SCache uses HTTP protocol for communication between nodes in the cluster. HTTP protocol adds additional overhead during transmission. it can be improved by defining our own custom protocol or via socket.
-We can define any Service discovery servers like zookeeper for Node discovery.
+1 . SCache uses Mysql has the underlying data store. As concurrency,faster retrieval and partitions are handled in MySql by default it was easy for development but we can define our own storage using files to make it faster.
+2 . SCache uses HTTP protocol for communication between nodes in the cluster. HTTP protocol adds additional overhead during transmission. it can be improved by defining our own custom protocol or via socket.
+3 . We can define any Service discovery servers like zookeeper for Node discovery.
 
 Installation Guide:
 Require : Tomcat7,Mysql,Maven,Java 1.5 above
