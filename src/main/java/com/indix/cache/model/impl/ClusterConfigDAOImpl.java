@@ -35,6 +35,8 @@ public class ClusterConfigDAOImpl implements ClusterConfigDAO {
 			ClusterConfiguration clusterConfiguration = new ClusterConfiguration();
 			clusterConfiguration.setIp(ip);
 			clusterConfiguration.setPort(port);
+			clusterConfiguration.setCommitLogId(0);
+			clusterConfiguration.setStatus("ACTIVE");
 			clusterConfiguration.setCreatedAt(new Timestamp(System.currentTimeMillis()));
 			clusterConfiguration.setUpdatedAt(new Timestamp(System.currentTimeMillis()));
 			session.saveOrUpdate(clusterConfiguration);
@@ -55,7 +57,7 @@ public class ClusterConfigDAOImpl implements ClusterConfigDAO {
 			session = sessionFactory.openSession();
 			txn = session.beginTransaction();
 			String hql = "SELECT CLUSTER_CONF_ID,IP,PORT,COMMIT_LOG_ID,STATUS,CREATED_AT,UPDATED_AT FROM CLUSTER_CONFIGURATION WHERE STATUS != \"INACTIVE\"";
-			Query q = session.createSQLQuery(hql).addEntity(CommitLogs.class);
+			Query q = session.createSQLQuery(hql).addEntity(ClusterConfiguration.class);
 			clusterList = (List<ClusterConfiguration>) q.list();
 			txn.commit();
 		} finally {

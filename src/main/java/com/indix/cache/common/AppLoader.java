@@ -18,7 +18,7 @@ public class AppLoader implements ServletContextListener {
 
 		@Override
 		public void contextInitialized(ServletContextEvent servletContextEvent) {
-			BackGroundWorker.initiateWorker(100, new CommitLogWorker());
+			BackGroundWorker.initiateWorker(5000, new CommitLogWorker());
 		}
 
 		@Override

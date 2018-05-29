@@ -47,5 +47,14 @@ public class CacheRequestResource {
 		BOBuilder.getCacheBO().sinkData(value);
 		return Response.status(200).build();
 	}
+	
+	@POST
+	@Path("nodes")
+	@Produces({ MediaType.APPLICATION_JSON })
+	@Consumes({ MediaType.APPLICATION_JSON })
+	public Response discoveredNodes(Map<String, String> value) {
+		BOBuilder.getCacheBO().addClusterConf(value);
+		return Response.status(200).build();
+	}
 
 }

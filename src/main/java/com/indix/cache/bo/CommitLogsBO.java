@@ -47,7 +47,9 @@ public class CommitLogsBO {
 					List<CommitLogs> commitLogList = ImplBuilder.getCommitLogsObject()
 							.getCommitLogs(clusterConf.getCommitLogId());
 					CommitLogsBO.setFlag(false);
-					BackGroundWorker.submitWork(new SinkDataWorker(commitLogList, clusterConf));
+					if (commitLogList.size() > 0) {
+						BackGroundWorker.submitWork(new SinkDataWorker(commitLogList, clusterConf));
+					}
 				}
 			}
 		}
@@ -82,11 +84,17 @@ public class CommitLogsBO {
 				String status = clusterConf.getStatus();
 				Timestamp updatedAt = clusterConf.getUpdatedAt();
 				if (status.equalsIgnoreCase("ACTIVE")) {
+					System.out.println(" marked Failed");
 					clusterConf.setStatus("FAILED");
 				} else {
 					Timestamp beforeTime = new Timestamp(System.currentTimeMillis() - TimeUnit.MINUTES.toMillis(30));
 					if (updatedAt.before(beforeTime)) {
+						System.out.println(" marked inactive");
 						clusterConf.setStatus("INACTIVE");
+					}
+					else
+					{
+						System.out.println(" in Failed");
 					}
 				}
 				ImplBuilder.getClusterConfigDAOImpl().updateClusterConfiguration(clusterConf);

@@ -58,4 +58,13 @@ public class CacheBO {
 		ImplBuilder.getCommitLogsObject().addCommitLogs(valueObject);
 	}
 
+	/**
+	 * 
+	 * @param valueObject
+	 */
+	public void addClusterConf(Map<String, String> valueObject) {
+		ImplBuilder.getClusterConfigDAOImpl().addClusteConfigData(valueObject.get("ip"),
+				Integer.parseInt(valueObject.get("port")));
+	}
+
 }
