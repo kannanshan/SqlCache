@@ -1,4 +1,4 @@
-SCache - SQLCache
+SCache is a simple distributed key value store which uses SQL as its storage.
 
 Assumptions:
 
