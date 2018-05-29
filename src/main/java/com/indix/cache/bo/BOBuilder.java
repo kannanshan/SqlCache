@@ -6,4 +6,9 @@ public class BOBuilder {
 	{
 		return new CacheBO();
 	}
+	
+	public static CommitLogsBO getCommitLogsBO()
+	{
+		return new CommitLogsBO();
+	}
 }

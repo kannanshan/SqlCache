@@ -8,8 +8,14 @@
 
 package com.indix.cache.model.dao;
 
+import java.util.List;
+
+import com.indix.cache.model.vo.ClusterConfiguration;
+
 public interface ClusterConfigDAO {
 	
-	public abstract void addClusteConfigData();
+	public abstract void addClusteConfigData(String ip,Integer port);
+	
+	public abstract List<ClusterConfiguration> getClusterConfiguration();
 
 }
