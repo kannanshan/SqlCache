@@ -45,33 +45,14 @@ Steps
  Now we have two servers up and running. We need to form cluster by making an http call to both teh servers.
  Find the curl command below.
  
- curl -X POST \
-  http://localhost:8081/SqlCache/nodes \
-  -H 'content-type: application/json' \
-  -d '{
-    "ip": "127.0.0.1",
-    "port":"8080"
-}'
+ curl -X POST http://localhost:8081/SqlCache/nodes -H 'content-type: application/json' -d '{"ip": "127.0.0.1","port":"8080"}'
 
-curl -X POST \
-  http://localhost:8080/SqlCache/nodes \
-  -H 'content-type: application/json' \
-  -d '{
-    "ip": "127.0.0.1",
-    "port":"8081"
-}'
+curl -X POST http://localhost:8080/SqlCache/nodes -H 'content-type: application/json' -d '{"ip": "127.0.0.1","port":"8081"}'
 
 Curl commands for set and get
-curl -X POST \
-  http://127.0.0.1:8081/SqlCache/set/ \
-  -H 'content-type: application/json' \
-  -d '{
-    "cricket": "sachin"
-}'
+curl -X POST http://127.0.0.1:8081/SqlCache/set/ -H 'content-type: application/json' -d '{"cricket": "sachin"}'
 
-curl -X GET \
-  http://localhost:8080/SqlCache/get/cricket \
-  -H 'content-type: application/json' \
+curl -X GET http://localhost:8080/SqlCache/get/cricket -H 'content-type: application/json'
 
 Due to time constraint not able to complete the Integration test scripts and thought of creating a docker file which would have made the installation easier but not able to complete the above two because of the time constraints. 
  
