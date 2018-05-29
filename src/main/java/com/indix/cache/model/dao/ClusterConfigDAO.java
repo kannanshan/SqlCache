@@ -17,5 +17,7 @@ public interface ClusterConfigDAO {
 	public abstract void addClusteConfigData(String ip,Integer port);
 	
 	public abstract List<ClusterConfiguration> getClusterConfiguration();
+	
+	public abstract void updateCommitLogId(ClusterConfiguration clusterConfiguration);
 
 }

@@ -1,8 +1,10 @@
 package com.indix.cache.model.impl;
 
 import java.sql.Timestamp;
+import java.util.List;
 import java.util.Map;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -37,5 +39,26 @@ public class CommitLogsDAOImpl implements CommitLogsDAO {
 		}
 
 	}
+
+	@Override
+	public List<CommitLogs> getCommitLogs(Integer commitLogId) {
+		List<CommitLogs> commitLogs = null;
+		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+		Session session = null;
+		Transaction txn = null;
+		try {
+			session = sessionFactory.openSession();
+			txn = session.beginTransaction();
+			String hql = "SELECT CLUSTER_CONF_ID,IP,PORT,COMMIT_LOG_ID,CREATED_AT,UPDATED_AT FROM CLUSTER_CONFIGURATION WHERE COMMIT_LOG_ID > :COMMIT_LOG_ID ORDER BY COMMIT_LOG_ID ASC LIMIT 10";
+			Query q = session.createSQLQuery(hql).addEntity(CommitLogs.class);
+			q.setParameter("COMMIT_LOG_ID", commitLogId);
+			commitLogs = (List<CommitLogs>) q.list();
+			txn.commit();
+		} finally {
+			session.close();
+		}
+		return commitLogs;
+	}
+
 
 }

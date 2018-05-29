@@ -11,14 +11,19 @@ package com.indix.cache.common;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
+import com.indix.cache.bo.CommitLogsBO;
+import com.indix.cache.bo.CommitLogsBO.CommitLogWorker;
+
 public class AppLoader implements ServletContextListener {
 
 		@Override
 		public void contextInitialized(ServletContextEvent servletContextEvent) {
+			BackGroundWorker.initiateWorker(100, new CommitLogWorker());
 		}
 
 		@Override
 		public void contextDestroyed(ServletContextEvent servletContextEvent) {
+			BackGroundWorker.stopWorkers();
 		}
 
 	}

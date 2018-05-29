@@ -38,6 +38,7 @@ public class CacheBO {
 	 */
 	public void putValue(Map<String, String> valueObject) {
 		setValue(valueObject);
+		CommitLogsBO.setFlag(true);
 		addCommitLogs(valueObject);
 	}
 

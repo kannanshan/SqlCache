@@ -11,12 +11,14 @@ package com.indix.cache.model.impl;
 import java.sql.Timestamp;
 import java.util.List;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 import com.indix.cache.common.HibernateUtil;
 import com.indix.cache.model.dao.ClusterConfigDAO;
+import com.indix.cache.model.vo.Cache;
 import com.indix.cache.model.vo.ClusterConfiguration;
 import com.indix.cache.model.vo.CommitLogs;
 
@@ -52,12 +54,27 @@ public class ClusterConfigDAOImpl implements ClusterConfigDAO {
 		try {
 			session = sessionFactory.openSession();
 			txn = session.beginTransaction();
-			clusterList = session.createCriteria(ClusterConfiguration.class).list();
-			txn.commit();
+			clusterList = (List<ClusterConfiguration>) session.createCriteria(ClusterConfiguration.class).list();
 		} finally {
 			session.close();
 		}
 		return clusterList;
+	}
+
+	@Override
+	public void updateCommitLogId(ClusterConfiguration clusterConfiguration ) {
+		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+		Session session = null;
+		Transaction txn = null;
+		try {
+			session = sessionFactory.openSession();
+			txn = session.beginTransaction();
+			session.saveOrUpdate(clusterConfiguration);
+			txn.commit();
+		} finally {
+			session.close();
+		}
+
 	}
 
 }

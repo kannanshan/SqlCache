@@ -11,5 +11,11 @@ public class ImplBuilder {
 	{
 		return new CommitLogsDAOImpl();
 	}
+	
+	public static ClusterConfigDAOImpl getClusterConfigDAOImpl()
+	{
+		return new ClusterConfigDAOImpl();
+	}
+
 
 }

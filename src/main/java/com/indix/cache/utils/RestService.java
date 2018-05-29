@@ -22,13 +22,11 @@ public class RestService {
 
 	static HttpClient httpClient = HttpClientBuilder.create().build();
 
-	public static Object sendPostRequest(String url, Map<String, String> headerMap, JSONObject postData)
+	public static Object sendPostRequest(String url, JSONObject postData)
 			throws Exception {
 		Object response = null;
 		HttpPost httpPost = new HttpPost(url);
-		for (String key : headerMap.keySet()) {
-			httpPost.addHeader(key, headerMap.get(key));
-		}
+		httpPost.addHeader("Content-Type", "application/json");
 		StringEntity params = new StringEntity(postData.toString(), "UTF-8");
 		httpPost.setEntity(params);
 		HttpResponse httpResponse = httpClient.execute(httpPost);
