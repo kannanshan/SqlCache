@@ -13,8 +13,12 @@ Assumptions:
 4 . There is no partitioning or sharding with respect to key. All the keys are stored in all the nodes. 
 
 Installation Guide:
-Require : Tomcat7,Mysql,Maven,Java 1.5 above
-Need to run two local tomcat servers with different port. Need to change the data base name in hibernate conf file in each generated war file. 
+Require : Tomcat7,Mysql,Maven,Java 1.5 above.
+
+
+Need to run two local tomcat servers with different port. 
+
+Need to change the data base name in hibernate conf file in each generated war file. 
 
 Steps
   
@@ -34,7 +38,7 @@ Steps
   5 . Start the tomat server with generated war  
   
   
-  6 . Repeat the step from 2 with different Database name sql_cache_2
+  6 . Repeat the process from step 2 with different Database name in the hibernate file(sql_cache_2)
 
  Now we have two servers up and running. We need to form cluster by making an http call to both teh servers.
  Find the curl command below.
