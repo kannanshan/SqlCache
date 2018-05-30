@@ -1,3 +1,5 @@
+                              
+
 SCache is a simple distributed key value store which uses SQL as its storage.
 
 Assumptions:
@@ -7,6 +9,8 @@ Assumptions:
 2 . With respect to CAP theorem. Consistency is compromised so the SCache will be 100% available with eventually consistent data.
 
 3 . Nodes in the cluster are not dicovered by itself. SCache doest not have a service discovery like zookeeper. we need to manually form the clusters with ip and port either via text file or via http calls.
+
+4 . There is no partitioning or sharding with respect to key. All the keys are stored in all the nodes. 
 
 Possible Improvements:
 
