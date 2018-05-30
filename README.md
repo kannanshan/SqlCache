@@ -12,16 +12,6 @@ Assumptions:
 
 4 . There is no partitioning or sharding with respect to key. All the keys are stored in all the nodes. 
 
-Possible Improvements:
-
-1 . SCache uses Mysql has the underlying data store. As concurrency,faster retrieval and partitions are handled in MySql by default it was easy for development but we can define our own storage using files to make it faster.
-
-
-2 . SCache uses HTTP protocol for communication between nodes in the cluster. HTTP protocol adds additional overhead during transmission. it can be improved by defining our own custom protocol or via socket.
-
-
-3 . We can define any Service discovery servers like zookeeper for Node discovery.
-
 Installation Guide:
 Require : Tomcat7,Mysql,Maven,Java 1.5 above
 Need to run two local tomcat servers with different port. Need to change the data base name in hibernate conf file in each generated war file. 
@@ -57,6 +47,17 @@ Curl commands for set and get
 curl -X POST http://127.0.0.1:8081/SqlCache/set/ -H 'content-type: application/json' -d '{"cricket": "sachin"}'
 
 curl -X GET http://localhost:8080/SqlCache/get/cricket -H 'content-type: application/json'
+
+Possible Improvements:
+
+1 . SCache uses Mysql has the underlying data store. As concurrency,faster retrieval and partitions are handled in MySql by default it was easy for development but we can define our own storage using files to make it faster.
+
+
+2 . SCache uses HTTP protocol for communication between nodes in the cluster. HTTP protocol adds additional overhead during transmission. it can be improved by defining our own custom protocol or via socket.
+
+
+3 . We can define any Service discovery servers like zookeeper for Node discovery.
+
 
 Due to time constraint not able to complete the Integration test scripts and thought of creating a docker file which would have made the installation easier but not able to complete the above two because of the time constraints. 
  
