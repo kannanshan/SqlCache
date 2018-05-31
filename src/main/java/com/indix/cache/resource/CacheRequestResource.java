@@ -42,7 +42,7 @@ public class CacheRequestResource {
 	@Path("sink")
 	@Produces({ MediaType.APPLICATION_JSON })
 	@Consumes({ MediaType.APPLICATION_JSON })
-	public Response sinkdata(Map<String, String> value) {
+	public Response sinkdata(Map<String, Map<String,String>> value) {
 		BOBuilder.getCacheBO().sinkData(value);
 		return Response.status(200).build();
 	}

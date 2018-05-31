@@ -69,12 +69,17 @@ public class CommitLogsBO {
 		public void run() {
 			try {
 				JSONObject valueMap = null;
+				JSONObject timeMap = null;
 				Integer commitLogId = 0;
 				for (CommitLogs commitLog : commitLogs) {
 					valueMap = new JSONObject();
-					valueMap.put(commitLog.getKey(), commitLog.getValue());
+					timeMap = new JSONObject();
+					timeMap.put("value", commitLog.getValue());
+					timeMap.put("timeStamp", commitLog.getUpdatedAt().toString());
+					valueMap.put(commitLog.getKey(), timeMap);
 					commitLogId = commitLog.getCommitLogId();
 				}
+				System.out.println(valueMap.toJSONString());
 				RestService.sendPostRequest(
 						"http://" + clusterConf.getIp() + ":" + clusterConf.getPort() + "/SqlCache/sink/", valueMap);
 				clusterConf.setCommitLogId(commitLogId);

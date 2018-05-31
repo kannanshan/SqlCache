@@ -14,5 +14,5 @@ public interface CacheDAO {
 	
 	public String getKey(String key);
 	public void setKey(Map<String,String> value);
-
+	public void updateKey(Map<String,Map<String,String>> value);	
 }

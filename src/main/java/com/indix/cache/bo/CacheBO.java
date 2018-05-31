@@ -46,15 +46,15 @@ public class CacheBO {
 	 * 
 	 * @param valueObject
 	 */
-	public void sinkData(Map<String, String> valueObject) {
-		setValue(valueObject);
+	public void sinkData(Map<String, Map<String,String>> valueObject) {
+		ImplBuilder.getCacheImpleObject().updateKey(valueObject);
 	}
 
 	/**
 	 * 
 	 * @param valueObject
 	 */
-	public void addCommitLogs(Map<String, String> valueObject) {
+	public void addCommitLogs(Map<String,String> valueObject) {
 		ImplBuilder.getCommitLogsObject().addCommitLogs(valueObject);
 	}
 
