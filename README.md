@@ -1,6 +1,6 @@
                               
 
-SCache is a simple distributed key value store which uses SQL as its storage.
+SCache is a simple distributed key value store which uses SQL as its storage. Test
 
 Assumptions:
 
